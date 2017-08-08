@@ -1,7 +1,7 @@
 <?php
 
 /***************************************************************
- * Extension Manager/Repository config file for ext: "vhlib"
+ * Extension Manager/Repository config file for ext: "tgm_lib"
  *
  * Manual updates:
  * Only the data in the array - anything else is removed by next write.
@@ -9,8 +9,8 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'ViewHelperLibrary',
-	'description' => 'ViewHelperLibrary',
+	'title' => 'TgM Library',
+	'description' => 'Library with ViewHelpers and other stuff',
 	'category' => 'misc',
 	'author' => 'Steffen Thierock',
 	'author_email' => 'st@teamgeist-medien.de',
