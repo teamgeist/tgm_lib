@@ -1,6 +1,6 @@
 <?php
 
-namespace TGM\TgmLib\ViewHelpers\Backend;
+namespace TgM\TgmLib\ViewHelpers\Backend;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
