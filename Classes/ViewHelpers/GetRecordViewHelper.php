@@ -1,21 +1,31 @@
 <?php
 
-namespace TgM\TgmLib\ViewHelpers;
+namespace TGM\TgmLib\ViewHelpers;
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
+/**
+ * GetRecordViewHelper
+ *
+ * Fetching a raw record from table=$table and uid=$uid.
+ * Returns the record, otherwise false.
+ */
 class GetRecordViewHelper extends AbstractViewHelper {
 
 	/**
-	 * TODO: languages, workspaces and userrights
-	 * @param string  $table
-	 * @param integer $uid
-	 *
+	 * @return void
+	 */
+	public function initializeArguments() {
+		$this->registerArgument('table', 'string', 'The table of the record.', false, 'tt_content');
+		$this->registerArgument('uid', 'int', 'The uid of the record.', true);
+	}
+
+	/**
 	 * @return array|bool
 	 */
-	public function render($table, $uid) {
-		$result = BackendUtility::getRecord($table, $uid);
+	public function render() {
+		$result = BackendUtility::getRecord($this->arguments['table'], $this->arguments['uid']);
 		return (empty($result) === false) ? $result : false;
 	}
 }

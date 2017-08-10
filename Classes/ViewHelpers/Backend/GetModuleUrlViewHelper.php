@@ -1,34 +1,44 @@
 <?php
 
-namespace TgM\TgmLib\ViewHelpers\Backend;
+namespace TGM\TgmLib\ViewHelpers\Backend;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
+/**
+ * GetModuleUrlViewHelper
+ */
 class GetModuleUrlViewHelper extends AbstractViewHelper {
+
+	/**
+	 * @return void
+	 */
+	public function initializeArguments() {
+		$this->registerArgument('action', 'string', 'The action for the record (edit, delete).', true);
+		$this->registerArgument('table', 'string', 'The table of the record.', true);
+		$this->registerArgument('uid', 'int', 'The uid of the record.', true);
+	}
 
 	/**
 	 * Builds an url to a module for a record in the backend.
 	 *
-	 * @param string $action The action for the record (edit, delete).
-	 * @param string $table The table of the record.
-	 * @param int    $uid The uid of the record.
-	 *
 	 * @return string The final url
 	 */
-	public function render(string $action, string $table, int $uid) {
+	public function render() {
 		// TODO: check userrights, check compatibility with workspaces, check if uid exists
 
 		$returnUrl = GeneralUtility::getIndpEnv('REQUEST_URI');
 
-		switch ($action) {
+		switch ($this->arguments['action']) {
 			case 'edit':
 				$url = BackendUtility::getModuleUrl(
 					'record_edit',
 					[
 						'edit' => [
-							$table => [$uid => 'edit']
+							$this->arguments['table'] => [
+								$this->arguments['uid'] => 'edit'
+							]
 						],
 						'returnUrl' => $returnUrl
 					]
@@ -38,7 +48,7 @@ class GetModuleUrlViewHelper extends AbstractViewHelper {
 				$url = BackendUtility::getModuleUrl(
 					'tce_db',
 					[
-						'cmd[' . $table . '][' . $uid . '][delete]' => 1,
+						'cmd[' . $this->arguments['table'] . '][' . $this->arguments['uid'] . '][delete]' => 1,
 						'redirect' => $returnUrl
 					]
 				);
