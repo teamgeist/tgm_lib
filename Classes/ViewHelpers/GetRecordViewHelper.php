@@ -9,7 +9,7 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * GetRecordViewHelper
  *
  * Fetching a raw record from table=$table and uid=$uid.
- * Returns the record, otherwise false.
+ * If the table or the uid does not exist, it'll return false, otherwise, the record.
  */
 class GetRecordViewHelper extends AbstractViewHelper {
 
