@@ -2,14 +2,11 @@
 
 namespace TGM\TgmLib\ViewHelpers\Image;
 
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-
 use TYPO3\CMS\Core\Imaging\ImageManipulation\CropVariantCollection;
 use TYPO3\CMS\Core\Resource\Exception\ResourceDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Service\ImageService;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Fluid\Core\ViewHelper\Exception;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
@@ -17,11 +14,10 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 /**
  * ResponsiveBackgroundViewHelper
  *
- * Generates images in different sizes and css code for responsive background image.
- *
+ * Generates images in different sizes and css code for responsive background images.
  *
  */
-class ResponsiveBackgroundViewHelper extends AbstractViewHelper {
+class ResponsiveBackgroundViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
     use CompileWithRenderStatic;
 
@@ -65,8 +61,6 @@ class ResponsiveBackgroundViewHelper extends AbstractViewHelper {
             /** @var ImageService $imageService */
             $imageService = $objectManager->get(ImageService::class);
 
-//            DebuggerUtility::var_dump($settings);
-
             if(count($settings)) {
                 foreach ($settings as $imageConf) {
                     $image = $imageService->getImage($src, $image, $treatIdAsReference);
@@ -95,7 +89,6 @@ class ResponsiveBackgroundViewHelper extends AbstractViewHelper {
                     if ($imageConf['mediaQuery']) {
                         $row = $imageConf['mediaQuery'] . '{' . $row . '}';
                     }
-//                    DebuggerUtility::var_dump($row, 'ResposiveBackgroundViewHelper');
                     $result .= $row;
                 }
             }
