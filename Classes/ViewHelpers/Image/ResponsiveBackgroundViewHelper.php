@@ -54,7 +54,8 @@ class ResponsiveBackgroundViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
         if ((is_null($src) && is_null($image)) || (!is_null($src) && !is_null($image))) {
             throw new Exception('You must either specify a string src or a File object.', 1502472301);
         }
-
+	//decode specialchars inside url(likely if public url is given) to avoid problems to find a folder when umlaute are used
+    	$src = urldecode($src);
         try {
             /** @var ObjectManager $objectManager */
             $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
